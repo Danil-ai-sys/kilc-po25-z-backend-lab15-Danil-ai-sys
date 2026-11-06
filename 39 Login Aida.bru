@@ -1,0 +1,25 @@
+meta {
+  name: 39 Login Aida
+  type: http
+  seq: 39
+}
+
+post {
+  url: {{baseUrl}}/auth/token
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  username: Aida
+  password: kilc-chat-2026
+}
+
+assert {
+  res.status: eq 200
+  res.body.token_type: eq bearer
+}
+
+script:post-response {
+  bru.setEnvVar("token", res.body.access_token);
+}
